@@ -1,5 +1,4 @@
 import config
-import threading
 from flask import Flask
 from flask import render_template, redirect
 from rpi_rf import RFDevice
@@ -25,12 +24,9 @@ def all_on():
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
-    #trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    main_thread = threading.Thread(target=lambda: tratrans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)).start()
-    sec_thread = threading.Thread(target=lambda:trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)).start()
-    lamp_thread = threading.Thread(target=lambda:trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)).start()
+    trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     config.main_state = 1
     config.sec_state = 1
     config.lamp_state = 1
@@ -42,12 +38,9 @@ def all_off():
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
-    #trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    main_thread = threading.Thread(target=lambda:tratrans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)).start()
-    sec_thread = threading.Thread(target=lambda:trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)).start()
-    lamp_thread = threading.Thread(target=lambda:trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)).start()
+    trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     config.main_state = 0
     config.sec_state = 0
     config.lamp_state = 0 
