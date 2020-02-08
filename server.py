@@ -79,13 +79,13 @@ def main_on():
 
 @app.route("/mainoff")
 def main_off():
-    main_state
+    global main_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global main_state = 0
+    main_state = 0
     return redirect("/")
 
 @app.route("/sectoggle")
