@@ -8,6 +8,8 @@ ON_MAIN = 70741
 ON_SEC = 83029
 OFF_MAIN = 70740
 OFF_SEC = 83028
+ON_LAMP = 86101
+OFF_LAMP = 86100
 TRANS_LENGTH = 350
 PROTOCOL = 1
 
@@ -23,6 +25,7 @@ def all_on():
     trans.tx_repeat = 10
     trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
     return redirect("/")
 
@@ -32,7 +35,8 @@ def all_off():
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24) 
+    trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24) 
     trans.cleanup()
     return redirect("/")
 
@@ -69,6 +73,24 @@ def sec_off():
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    trans.cleanup()
+    return redirect("/")
+
+@app.route("/lampon")
+def sec_on():
+    trans = RFDevice(TRANSMIT_PIN)
+    trans.enable_tx()
+    trans.tx_repeat = 10
+    trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
+    trans.cleanup()
+    return redirect("/")
+
+@app.route("/lampoff")
+def sec_off():
+    trans = RFDevice(TRANSMIT_PIN)
+    trans.enable_tx()
+    trans.tx_repeat = 10
+    trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
     return redirect("/")
     

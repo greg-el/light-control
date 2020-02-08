@@ -6,6 +6,8 @@ ON_MAIN = 70741
 ON_SEC = 83029
 OFF_MAIN = 70740
 OFF_SEC = 83028
+ON_LAMP = 86101
+OFF_LAMP = 86100
 TRANS_LENGTH = 350
 PROTOCOL = 2
 
@@ -28,9 +30,12 @@ if args.on:
     elif args.on == "sec":
         trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
         trans.cleanup()
+    elif args.on == "lamp":
+        trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     elif args.on == "all":
         trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-        trans.tx_code(ON_SEC, 2, TRANS_LENGTH, 24)
+        trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
+        trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
         trans.cleanup()
 
 if args.off:
@@ -42,7 +47,8 @@ if args.off:
         trans.cleanup()
     elif args.off == "all":
         trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-        trans.tx_code(OFF_SEC, 2, TRANS_LENGTH, 24)
+        trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
+        trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
         trans.cleanup()
 
 
