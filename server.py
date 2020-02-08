@@ -61,10 +61,8 @@ def main_toggle():
     global main_state
     if main_state == 0:
         main_on()
-        main_state = 1
     else:
         main_off()
-        main_state = 0
     return redirect("/")
 
 @app.route("/mainon")
@@ -94,10 +92,8 @@ def sec_toggle():
     global sec_state
     if sec_state == 0:
         sec_on()
-        sec_state = 1
     else:
         sec_off()
-        sec_state = 0
     return redirect("/")
 
 @app.route("/secon")
@@ -127,10 +123,8 @@ def lamp_toggle():
     global lamp_state
     if lamp_state == 0:
         lamp_on()
-        lamp_state = 1
     else:
         lamp_off()
-        lamp_state = 0
     return redirect("/")
 
 @app.route("/lampon")
