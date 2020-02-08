@@ -65,6 +65,7 @@ def main_toggle():
     else:
         main_off()
         main_state = 0
+    return redirect("/")
 
 @app.route("/mainon")
 def main_on():
@@ -97,6 +98,7 @@ def sec_toggle():
     else:
         sec_off()
         sec_state = 0
+    return redirect("/")
 
 @app.route("/secon")
 def sec_on():
@@ -129,6 +131,7 @@ def lamp_toggle():
     else:
         lamp_off()
         lamp_state = 0
+    return redirect("/")
 
 @app.route("/lampon")
 def lamp_on():
