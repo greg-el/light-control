@@ -12,7 +12,9 @@ ON_LAMP = 86101
 OFF_LAMP = 86100
 TRANS_LENGTH = 350
 PROTOCOL = 1
-
+main_state = 0
+sec_state = 0
+lamp_state = 0
 
 
 @app.route("/")
@@ -27,9 +29,9 @@ def all_on():
     trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    main_state = 1
-    sec_state = 1
-    lamp_state = 1
+    global main_state = 1
+    global sec_state = 1
+    global lamp_state = 1
     trans.cleanup()
     return redirect("/")
 
@@ -41,21 +43,21 @@ def all_off():
     trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    main_state = 0
-    sec_state = 0
-    lamp_state = 0 
+    global main_state = 0
+    global sec_state = 0
+    global lamp_state = 0 
     trans.cleanup()
     return redirect("/")
 
 
 @app.route("/maintoggle")
 def main_toggle():
-    if main_state == 0:
+    if global main_state == 0:
         main_on()
-        main_state = 1
+        global main_state = 1
     else:
         main_off()
-        main_state = 0
+        global main_state = 0
 
 @app.route("/mainon")
 def main_on():
@@ -64,7 +66,7 @@ def main_on():
     trans.tx_repeat = 10
     trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    main_state = 1
+    global main_state = 1
     return redirect("/")
 
 @app.route("/mainoff")
@@ -74,17 +76,17 @@ def main_off():
     trans.tx_repeat = 10
     trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    main_state = 0
+    global main_state = 0
     return redirect("/")
 
 @app.route("/sectoggle")
 def sec_toggle():
-    if sec_state == 0:
+    if global sec_state == 0:
         sec_on()
-        sec_state = 1
+        global sec_state = 1
     else:
         sec_off()
-        sec_state = 0
+        global sec_state = 0
 
 @app.route("/secon")
 def sec_on():
@@ -93,7 +95,7 @@ def sec_on():
     trans.tx_repeat = 10
     trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    sec_state = 1
+    global sec_state = 1
     return redirect("/")
 
 @app.route("/secoff")
@@ -103,17 +105,17 @@ def lamp_off():
     trans.tx_repeat = 10
     trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    sec_state = 0
+    global sec_state = 0
     return redirect("/")
 
 @app.route("/lamptoggle")
 def lamp_toggle():
-    if lamp_state == 0:
+    if global lamp_state == 0:
         lamp_on()
-        lamp_state = 1
+        global lamp_state = 1
     else:
         lamp_off()
-        lamp_state = 0
+        global lamp_state = 0
 
 @app.route("/lampon")
 def lamp_on():
@@ -122,7 +124,7 @@ def lamp_on():
     trans.tx_repeat = 10
     trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    lamp_state = 1
+    global lamp_state = 1
     return redirect("/")
 
 @app.route("/lampoff")
@@ -132,13 +134,11 @@ def sec_off():
     trans.tx_repeat = 10
     trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    lamp_state = 0
+    global lamp_state = 0
     return redirect("/")
     
 
 if __name__ == "__main__":
-    main_state = 0
-    sec_state = 0
-    lamp_state = 0
+
     app.run(host="0.0.0.0")
 
