@@ -23,54 +23,63 @@ def main_page():
 
 @app.route("/allon")
 def all_on():
+    global main_state
+    global sec_state 
+    global lamp_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    global main_state = 1
-    global sec_state = 1
-    global lamp_state = 1
+    main_state = 1
+    sec_state = 1
+    lamp_state = 1
     trans.cleanup()
     return redirect("/")
 
 @app.route("/alloff")
 def all_off():
+    global main_state
+    global sec_state 
+    global lamp_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    global main_state = 0
-    global sec_state = 0
-    global lamp_state = 0 
+    main_state = 0
+    sec_state = 0
+    lamp_state = 0 
     trans.cleanup()
     return redirect("/")
 
 
 @app.route("/maintoggle")
 def main_toggle():
-    if global main_state == 0:
+    global main_state
+    if  main_state == 0:
         main_on()
-        global main_state = 1
+         main_state = 1
     else:
         main_off()
-        global main_state = 0
+         main_state = 0
 
 @app.route("/mainon")
 def main_on():
+    global main_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global main_state = 1
+    main_state = 1
     return redirect("/")
 
 @app.route("/mainoff")
 def main_off():
+    main_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
@@ -81,60 +90,66 @@ def main_off():
 
 @app.route("/sectoggle")
 def sec_toggle():
-    if global sec_state == 0:
+    global sec_state
+    if sec_state == 0:
         sec_on()
-        global sec_state = 1
+        sec_state = 1
     else:
         sec_off()
-        global sec_state = 0
+        sec_state = 0
 
 @app.route("/secon")
 def sec_on():
+    global sec_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global sec_state = 1
+    sec_state = 1
     return redirect("/")
 
 @app.route("/secoff")
 def lamp_off():
+    global sec_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global sec_state = 0
+    sec_state = 0
     return redirect("/")
 
 @app.route("/lamptoggle")
 def lamp_toggle():
-    if global lamp_state == 0:
+    global lamp_state
+    if lamp_state == 0:
         lamp_on()
-        global lamp_state = 1
+        lamp_state = 1
     else:
         lamp_off()
-        global lamp_state = 0
+        lamp_state = 0
 
 @app.route("/lampon")
 def lamp_on():
+    global lamp_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global lamp_state = 1
+    lamp_state = 1
     return redirect("/")
 
 @app.route("/lampoff")
 def sec_off():
+    global lamp_state
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
     trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
     trans.cleanup()
-    global lamp_state = 0
+    lamp_state = 0
     return redirect("/")
     
 
