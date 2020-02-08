@@ -20,7 +20,6 @@ def main_page():
 
 @app.route("/allon")
 def all_on():
-    threads.append(x)
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
