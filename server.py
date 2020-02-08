@@ -12,9 +12,6 @@ ON_LAMP = 86101
 OFF_LAMP = 86100
 TRANS_LENGTH = 350
 PROTOCOL = 1
-main_state = 0
-sec_state = 0
-lamp_state = 0
 
 
 
@@ -140,5 +137,8 @@ def sec_off():
     
 
 if __name__ == "__main__":
+    main_state = 0
+    sec_state = 0
+    lamp_state = 0
     app.run(host="0.0.0.0")
 
