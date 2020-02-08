@@ -59,12 +59,12 @@ def all_off():
 @app.route("/maintoggle")
 def main_toggle():
     global main_state
-    if  main_state == 0:
+    if main_state == 0:
         main_on()
-         main_state = 1
+        main_state = 1
     else:
         main_off()
-         main_state = 0
+        main_state = 0
 
 @app.route("/mainon")
 def main_on():
