@@ -14,36 +14,61 @@ OFF_LAMP = 86100
 TRANS_LENGTH = 350
 PROTOCOL = 1
 
+def transmit(job_list=[]):
+    trans = RFDevice(TRANSMIT_PIN)
+    trans.enable_tx()
+    trans.tx_repeat = 10
+    for job in job_list:
+        trans.tx_code(job, PROTOCOL, TRANS_LENGTH, 24)
+        if job = ON_MAIN:
+            config.main_state = 1
+        elif job = OFF_MAIN:
+            config.main_state = 0
+        elif job = ON_SEC:
+            config.sec_state = 1
+        elif job = OFF_SEC:
+            config.sec_state = 0
+        elif job = ON_LAMP:
+            config.lamp_state = 1
+        elif job = OFF_LAMP:
+            config.lamp_state = 0
+
+    trans.cleanup()
+        
+
+
 @app.route("/")
 def main_page():
     return render_template("main.html")
 
 @app.route("/allon")
 def all_on():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    config.main_state = 1
-    config.sec_state = 1
-    config.lamp_state = 1
-    trans.cleanup()
+    transmit([ON_MAIN, ON_SEC, ON_LAMP])
+    #trans = RFDevice(TRANSMIT_PIN)
+    #trans.enable_tx()
+    #trans.tx_repeat = 10
+    #trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
+    #trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    #trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
+    #config.main_state = 1
+    #config.sec_state = 1
+    #config.lamp_state = 1
+    #trans.cleanup()
     return redirect("/")
 
 @app.route("/alloff")
 def all_off():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    config.main_state = 0
-    config.sec_state = 0
-    config.lamp_state = 0 
-    trans.cleanup()
+    transmit([OFF_MAIN, OFF_SEC, OFF_LAMP])
+    #trans = RFDevice(TRANSMIT_PIN)
+    #trans.enable_tx()
+    #trans.tx_repeat = 10
+    #trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
+    #trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
+    #trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
+    #config.main_state = 0
+    #config.sec_state = 0
+    #config.lamp_state = 0 
+    #trans.cleanup()
     return redirect("/")
 
 
