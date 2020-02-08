@@ -50,10 +50,10 @@ def all_off():
 @app.route("/maintoggle")
 def main_toggle():
     if config.main_state == 0:
-        main_on()
+        return redirect("/mainon")
     else:
-        main_off()
-    return redirect("/")
+        return redirect("/mainoff")
+
 
 @app.route("/mainon")
 def main_on():
@@ -78,9 +78,9 @@ def main_off():
 @app.route("/sectoggle")
 def sec_toggle():
     if config.sec_state == 0:
-        sec_on()
+        return redirect("/secon")
     else:
-        sec_off()
+        return redirect("/secoff")
     return redirect("/")
 
 @app.route("/secon")
