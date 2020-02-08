@@ -53,7 +53,7 @@ def all_off():
 
 @app.route("/maintoggle")
 def main_toggle():
-    if main_state = 0:
+    if main_state == 0:
         main_on()
         main_state = 1
     else:
@@ -82,7 +82,7 @@ def main_off():
 
 @app.route("/sectoggle")
 def sec_toggle():
-    if sec_state = 0:
+    if sec_state == 0:
         sec_on()
         sec_state = 1
     else:
@@ -111,7 +111,7 @@ def lamp_off():
 
 @app.route("/lamptoggle")
 def lamp_toggle():
-    if lamp_state = 0:
+    if lamp_state == 0:
         lamp_on()
         lamp_state = 1
     else:
