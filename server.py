@@ -81,7 +81,6 @@ def sec_toggle():
         return redirect("/secon")
     else:
         return redirect("/secoff")
-    return redirect("/")
 
 @app.route("/secon")
 def sec_on():
@@ -106,10 +105,9 @@ def lamp_off():
 @app.route("/lamptoggle")
 def lamp_toggle():
     if config.lamp_state == 0:
-        lamp_on()
+        return redirect("/lampon")
     else:
-        lamp_off()
-    return redirect("/")
+        return redirect("/lampoff")
 
 @app.route("/lampon")
 def lamp_on():
