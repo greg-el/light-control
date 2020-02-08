@@ -66,7 +66,7 @@ def main_on():
 
 @app.route("/mainoff")
 def main_off():
-    transmit[OFF_MAIN]
+    transmit([OFF_MAIN])
     return redirect("/")
 
 @app.route("/sectoggle")
