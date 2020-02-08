@@ -68,7 +68,7 @@ def sec_on():
     return redirect("/")
 
 @app.route("/secoff")
-def sec_off():
+def lamp_off():
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
@@ -77,7 +77,7 @@ def sec_off():
     return redirect("/")
 
 @app.route("/lampon")
-def sec_on():
+def lamp_on():
     trans = RFDevice(TRANSMIT_PIN)
     trans.enable_tx()
     trans.tx_repeat = 10
