@@ -20,17 +20,17 @@ def transmit(job_list=[]):
     trans.tx_repeat = 10
     for job in job_list:
         trans.tx_code(job, PROTOCOL, TRANS_LENGTH, 24)
-        if job = ON_MAIN:
+        if job == ON_MAIN:
             config.main_state = 1
-        elif job = OFF_MAIN:
+        elif job == OFF_MAIN:
             config.main_state = 0
-        elif job = ON_SEC:
+        elif job == ON_SEC:
             config.sec_state = 1
-        elif job = OFF_SEC:
+        elif job == OFF_SEC:
             config.sec_state = 0
-        elif job = ON_LAMP:
+        elif job == ON_LAMP:
             config.lamp_state = 1
-        elif job = OFF_LAMP:
+        elif job == OFF_LAMP:
             config.lamp_state = 0
 
     trans.cleanup()
