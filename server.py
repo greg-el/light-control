@@ -36,7 +36,6 @@ def transmit(job_list=[]):
     trans.cleanup()
         
 
-
 @app.route("/")
 def main_page():
     return render_template("main.html")
@@ -44,31 +43,11 @@ def main_page():
 @app.route("/allon")
 def all_on():
     transmit([ON_MAIN, ON_SEC, ON_LAMP])
-    #trans = RFDevice(TRANSMIT_PIN)
-    #trans.enable_tx()
-    #trans.tx_repeat = 10
-    #trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    #config.main_state = 1
-    #config.sec_state = 1
-    #config.lamp_state = 1
-    #trans.cleanup()
     return redirect("/")
 
 @app.route("/alloff")
 def all_off():
     transmit([OFF_MAIN, OFF_SEC, OFF_LAMP])
-    #trans = RFDevice(TRANSMIT_PIN)
-    #trans.enable_tx()
-    #trans.tx_repeat = 10
-    #trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    #trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    #config.main_state = 0
-    #config.sec_state = 0
-    #config.lamp_state = 0 
-    #trans.cleanup()
     return redirect("/")
 
 
@@ -82,22 +61,12 @@ def main_toggle():
 
 @app.route("/mainon")
 def main_on():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(ON_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.main_state = 1
+    transmit([ON_MAIN])
     return redirect("/")
 
 @app.route("/mainoff")
 def main_off():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(OFF_MAIN, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.main_state = 0
+    transmit[OFF_MAIN]
     return redirect("/")
 
 @app.route("/sectoggle")
@@ -109,22 +78,12 @@ def sec_toggle():
 
 @app.route("/secon")
 def sec_on():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(ON_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.sec_state = 1
+    transmit([ON_SEC])
     return redirect("/")
 
 @app.route("/secoff")
 def lamp_off():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(OFF_SEC, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.sec_state = 0
+    transmit([OFF_SEC])
     return redirect("/")
 
 @app.route("/lamptoggle")
@@ -136,22 +95,12 @@ def lamp_toggle():
 
 @app.route("/lampon")
 def lamp_on():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(ON_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.lamp_state = 1
+    transmit([ON_LAMP])
     return redirect("/")
 
 @app.route("/lampoff")
 def sec_off():
-    trans = RFDevice(TRANSMIT_PIN)
-    trans.enable_tx()
-    trans.tx_repeat = 10
-    trans.tx_code(OFF_LAMP, PROTOCOL, TRANS_LENGTH, 24)
-    trans.cleanup()
-    config.lamp_state = 0
+    transmit([OFF_LAMP])
     return redirect("/")
     
 
